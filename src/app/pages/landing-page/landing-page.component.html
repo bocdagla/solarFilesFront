@@ -1,0 +1,25 @@
+<nav class="navbar navbar-dark bg-primary">
+  <label class="btn btn-primary ms-2">
+    <mat-icon class="pt-1">upload</mat-icon>
+    Press here to upload a folder
+    <input type="file" webkitdirectory #fileSelector mat-button />
+  </label>
+</nav>
+<div class="card h-75">
+  <div class="card-body">
+    <ng-container
+      color="primary"
+      *ngIf="this.selectedFileData$ | async as selectedFiles; else noFiles"
+    >
+      <app-tree-node [nodeData]="selectedFiles"></app-tree-node>
+    </ng-container>
+    <ng-template #noFiles>
+      <h2>Files will be displayed here</h2>
+      <h3>Remember that only folders containing files will be shown</h3>
+      <h3>The preview only supports:</h3>
+      <ul *ngFor="let extension of this.suportedExtensions">
+        <li>{{extension}}</li>
+      </ul>
+    </ng-template>
+  </div>
+</div>
